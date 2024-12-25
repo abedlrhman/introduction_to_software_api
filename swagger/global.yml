@@ -1,0 +1,10 @@
+openapi: 3.0.0
+info:
+  title: My Express API
+  version: 1.0.0
+  description: A simple Express.js API
+
+components: 
+  schemas:
+    User: 
+      type: object

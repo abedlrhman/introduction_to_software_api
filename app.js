@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const yamljs = require('yamljs'); 
 
 
 const app = express();
@@ -12,11 +13,7 @@ const port = 3000;
 app.use(express.json()); 
 
 // MongoDB connection
-mongoose.connect(process.env.DB_CONNECTION_URL, { 
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  
-})
+mongoose.connect(process.env.DB_CONNECTION_URL, {})
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('Error connecting to MongoDB:', err));
 
@@ -30,7 +27,8 @@ const options = {
       description: 'A simple Express.js API',
     },
   },
-  apis: ['./routes/*.js'], // Path to your route files
+  swaggerDefinition: yamljs.load('./swagger/global.yml'),
+  apis: ['./routes/*.js', './swagger/*.yml'], // Include all YAML files
 };
 
 const swaggerSpec = swaggerJSDoc(options);

@@ -1,0 +1,139 @@
+openapi: 3.0.0
+info:
+  title: Dishes API
+  version: 1.0.0
+  description: A simple Dishes API
+
+paths:
+  /dishes:
+    get:
+      summary: List all dishes
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Dish'
+    post:
+      summary: Create a new dish
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DishInput'
+      responses:
+        '201':
+          description: Dish created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dish'
+        '400':
+          description: Bad request
+  /dishes/{dishId}/ingredients:
+    post:
+      summary: Add an ingredient to a dish
+      parameters:
+        - in: path
+          name: dishId
+          schema:
+            type: integer # Important: Type is integer
+          required: true
+          description: ID of the dish
+      requestBody:
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/DishIngredientInput'
+      responses:
+        '200':
+          description: Ingredient added
+        '404':
+          description: Dish not found
+        '400':
+          description: Bad request
+  /dishes/{dishId}/category:
+    post:
+      summary: Assign a category to a dish
+      parameters:
+        - in: path
+          name: dishId
+          schema:
+            type: integer # Important: Type is integer
+          required: true
+          description: ID of the dish
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DishCategoryInput'
+      responses:
+        '200':
+          description: Category assigned
+        '404':
+          description: Dish not found
+        '400':
+          description: Bad request
+
+components:
+  schemas:
+    Dish:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        country:
+          type: integer
+        cookingTime:
+          type: string
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/DishIngredient'
+        category:
+          type: integer
+        recipe:
+          type: string
+    DishInput:
+      type: object
+      required:
+        - name
+        - country
+      properties:
+        name:
+          type: string
+        country:
+          type: integer
+        cookingTime:
+          type: string
+        recipe:
+          type: string
+    DishIngredient:
+      type: object
+      properties:
+        ingredient:
+          type: integer
+        amount:
+          type: string
+    DishIngredientInput:
+      type: object
+      required:
+        - ingredient
+        - amount
+      properties:
+        ingredient:
+          type: integer
+        amount:
+          type: string
+    DishCategoryInput:
+      type: object
+      required:
+        - category
+      properties:
+        category:
+          type: integer

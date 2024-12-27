@@ -1,10 +1,17 @@
+
 openapi: 3.0.0
 info:
-  title: My Express API
+  title: Dishes API
   version: 1.0.0
-  description: A simple Express.js API
+  description: A simple Dishes API
 
 components: 
   schemas:
-    User: 
+    Category: 
+      type: object
+    Country: 
+      type: object
+    Ingredient: 
+      type: object
+    Dish: 
       type: object

@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+  title: Dishes API
+  version: 1.0.0
+  description: A simple Dishes API
+
+paths:
+  /ingradients:
+    get:
+      summary: List all ingradients
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ingredient'
+    post:
+      summary: Create a new ingredient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngredientInput'
+      responses:
+        '201':
+          description: Ingredient created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ingredient'
+        '400':
+          description: Bad request
+
+components:
+  schemas:
+    Ingredient:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    IngredientInput:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string

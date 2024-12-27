@@ -13,7 +13,7 @@ const port = 3000;
 app.use(express.json()); 
 
 // MongoDB connection
-mongoose.connect(process.env.DB_CONNECTION_URL, {})
+mongoose.connect( process.env.DB_CONNECTION_URL, {})
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('Error connecting to MongoDB:', err));
 

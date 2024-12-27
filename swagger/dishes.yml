@@ -40,7 +40,7 @@ paths:
         - in: path
           name: dishId
           schema:
-            type: integer # Important: Type is integer
+            type: string # Important: Type is string
           required: true
           description: ID of the dish
       requestBody:
@@ -62,7 +62,7 @@ paths:
         - in: path
           name: dishId
           schema:
-            type: integer # Important: Type is integer
+            type: string # Important: Type is string
           required: true
           description: ID of the dish
       requestBody:

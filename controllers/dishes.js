@@ -24,11 +24,11 @@ const getAll = async (req, res) => {
 
 const createIngradient = async (req, res) => {
   try {
-    const dish = await Dish.findOne({ id: parseInt(req.params.dishId) }); // Parse dishId to integer
+    const dish = await Dish.findOne({ _id: req.params.dishId });
     if (!dish) return res.status(404).send("Dish not found");
 
     const ingredientData = {
-      ingredient: parseInt(req.body.ingredient), // Parse ingredient to integer
+      ingredient: req.body.ingredient, 
       amount: req.body.amount,
     };
     dish.ingredients.push(ingredientData);
@@ -41,10 +41,10 @@ const createIngradient = async (req, res) => {
 
 const createCategory = async (req, res) => {
   try {
-    const dish = await Dish.findOne({ id: parseInt(req.params.dishId) }); // Parse dishId to integer
+    const dish = await Dish.findOne({ _id: req.params.dishId });
     if (!dish) return res.status(404).send("Dish not found");
 
-    dish.category = parseInt(req.body.category); // Parse category to integer
+    dish.category = req.body.category;
     await dish.save();
     res.status(200).send("Category assigned to dish");
   } catch (err) {

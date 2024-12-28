@@ -54,5 +54,13 @@ app.use('/ingradients', ingradientsRoutes);
 const dishesRoutes = require('./routes/dishes'); 
 app.use('/dishes', dishesRoutes);
 
+app.get('/', async (req, res) => {
+  try {
+    res.status(200).json({message: "hello world"});
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
 
 app.listen(port, () => console.log(`Server listening on port ${port}`));

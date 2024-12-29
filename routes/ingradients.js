@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const ingradientsController = require('../controllers/ingradients');
+const ingredientsController = require('../controllers/ingradients');
 
-router.post('/', ingradientsController.create);
-router.get('/', ingradientsController.getAll);
+router.post('/', ingredientsController.create);
+router.get('/', ingredientsController.getAll);
+router.put('/:id', ingredientsController.update);
+router.delete('/:id', ingredientsController.remove);
 
 module.exports = router;

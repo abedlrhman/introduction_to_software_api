@@ -19,7 +19,40 @@ const getAll = async (req, res) => {
   }
 };
 
+const update = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updates = req.body;
+
+    const category = await Category.findByIdAndUpdate(id, updates, { new: true });
+    if (!category) {
+      return res.status(404).json({ error: "Category not found" });
+    }
+
+    res.json(category);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+const remove = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const category = await Category.findByIdAndDelete(id);
+    if (!category) {
+      return res.status(404).json({ error: "Category not found" });
+    }
+
+    res.json({ message: "Category deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 module.exports = {
   create,
   getAll,
+  update,
+  remove,
 };

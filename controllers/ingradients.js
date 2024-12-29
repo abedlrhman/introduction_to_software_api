@@ -19,7 +19,40 @@ const getAll = async (req, res) => {
   }
 };
 
+const update = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updates = req.body;
+
+    const ingredient = await Ingredient.findByIdAndUpdate(id, updates, { new: true });
+    if (!ingredient) {
+      return res.status(404).json({ error: "Ingredient not found" });
+    }
+
+    res.json(ingredient);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+const remove = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const ingredient = await Ingredient.findByIdAndDelete(id);
+    if (!ingredient) {
+      return res.status(404).json({ error: "Ingredient not found" });
+    }
+
+    res.json({ message: "Ingredient deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 module.exports = {
   create,
   getAll,
+  update,
+  remove,
 };

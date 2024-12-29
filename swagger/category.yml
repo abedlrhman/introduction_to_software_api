@@ -33,6 +33,46 @@ paths:
                 $ref: '#/components/schemas/Category'
         '400':
           description: Bad request
+  /categories/{id}:
+    put:
+      summary: Update a category
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID of the category to update
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryInput'
+      responses:
+        '200':
+          description: Category updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '400':
+          description: Bad request
+        '404':
+          description: Category not found
+    delete:
+      summary: Delete a category
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID of the category to delete
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Category deleted successfully
+        '404':
+          description: Category not found
 
 components:
   schemas:

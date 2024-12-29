@@ -33,6 +33,45 @@ paths:
                 $ref: '#/components/schemas/Dish'
         '400':
           description: Bad request
+    put:
+      summary: Update a dish
+      parameters:
+        - in: path
+          name: dishId
+          schema:
+            type: string 
+          required: true
+          description: ID of the dish
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DishInput' 
+      responses:
+        '200':
+          description: Dish updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dish'
+        '400':
+          description: Bad request
+        '404':
+          description: Dish not found
+    delete:
+      summary: Delete a dish
+      parameters:
+        - in: path
+          name: dishId
+          schema:
+            type: string 
+          required: true
+          description: ID of the dish
+      responses:
+        '204':
+          description: Dish deleted successfully
+        '404':
+          description: Dish not found
   /dishes/{dishId}/ingredients:
     post:
       summary: Add an ingredient to a dish
@@ -40,7 +79,7 @@ paths:
         - in: path
           name: dishId
           schema:
-            type: string # Important: Type is string
+            type: string 
           required: true
           description: ID of the dish
       requestBody:
@@ -55,6 +94,28 @@ paths:
           description: Dish not found
         '400':
           description: Bad request
+    delete:
+      summary: Remove an ingredient from a dish
+      parameters:
+        - in: path
+          name: dishId
+          schema:
+            type: string 
+          required: true
+          description: ID of the dish
+        - in: path
+          name: ingredientId
+          schema:
+            type: string 
+          required: true
+          description: ID of the ingredient
+      responses:
+        '200':
+          description: Ingredient removed
+        '404':
+          description: Dish or ingredient not found
+        '400':
+          description: Bad request
   /dishes/{dishId}/category:
     post:
       summary: Assign a category to a dish
@@ -62,7 +123,7 @@ paths:
         - in: path
           name: dishId
           schema:
-            type: string # Important: Type is string
+            type: string 
           required: true
           description: ID of the dish
       requestBody:
@@ -77,6 +138,22 @@ paths:
           description: Dish not found
         '400':
           description: Bad request
+    delete:
+      summary: Remove a category from a dish
+      parameters:
+        - in: path
+          name: dishId
+          schema:
+            type: string 
+          required: true
+          description: ID of the dish
+      responses:
+        '200':
+          description: Category removed
+        '404':
+          description: Dish not found
+        '400':
+          description: Bad request
 
 components:
   schemas:
@@ -84,7 +161,7 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string 
         name:
           type: string
         country:

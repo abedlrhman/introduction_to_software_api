@@ -5,9 +5,9 @@ info:
   description: A simple Dishes API
 
 paths:
-  /ingradients:
+  /ingredients:
     get:
-      summary: List all ingradients
+      summary: List all ingredients
       responses:
         '200':
           description: Successful operation
@@ -33,6 +33,45 @@ paths:
                 $ref: '#/components/schemas/Ingredient'
         '400':
           description: Bad request
+    put:
+      summary: Update an ingredient
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string 
+          required: true
+          description: ID of the ingredient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngredientInput' 
+      responses:
+        '200':
+          description: Ingredient updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ingredient'
+        '400':
+          description: Bad request
+        '404':
+          description: Ingredient not found
+    delete:
+      summary: Delete an ingredient
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string 
+          required: true
+          description: ID of the ingredient
+      responses:
+        '204':
+          description: Ingredient deleted successfully
+        '404':
+          description: Ingredient not found
 
 components:
   schemas:
@@ -40,7 +79,7 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string 
         name:
           type: string
     IngredientInput:

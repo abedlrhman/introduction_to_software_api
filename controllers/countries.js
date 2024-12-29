@@ -19,7 +19,42 @@ const getAll = async (req, res) => {
   }
 };
 
+
+const update = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updates = req.body;
+
+    const country = await Country.findByIdAndUpdate(id, updates, { new: true });
+    if (!country) {
+      return res.status(404).json({ error: "Country not found" });
+    }
+
+    res.json(country);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+const remove = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const country = await Country.findByIdAndDelete(id);
+    if (!country) {
+      return res.status(404).json({ error: "Country not found" });
+    }
+
+    res.json({ message: "Country deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+
 module.exports = {
   create,
   getAll,
+  update,
+  remove,
 };

@@ -33,6 +33,46 @@ paths:
                 $ref: '#/components/schemas/Country'
         '400':
           description: Bad request
+  /countries/{id}:
+    put:
+      summary: Update a country
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID of the country to update
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CountryInput'
+      responses:
+        '200':
+          description: Country updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Country'
+        '400':
+          description: Bad request
+        '404':
+          description: Country not found
+    delete:
+      summary: Delete a country
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID of the country to delete
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Country deleted successfully
+        '404':
+          description: Country not found
 
 components:
   schemas:

@@ -165,7 +165,7 @@ components:
         name:
           type: string
         country:
-          type: integer
+          type: string
         cookingTime:
           type: string
         ingredients:
@@ -173,7 +173,7 @@ components:
           items:
             $ref: '#/components/schemas/DishIngredient'
         category:
-          type: integer
+          type: string
         recipe:
           type: string
     DishInput:
@@ -185,7 +185,7 @@ components:
         name:
           type: string
         country:
-          type: integer
+          type: string
         cookingTime:
           type: string
         recipe:
@@ -194,7 +194,7 @@ components:
       type: object
       properties:
         ingredient:
-          type: integer
+          type: string
         amount:
           type: string
     DishIngredientInput:
@@ -204,7 +204,7 @@ components:
         - amount
       properties:
         ingredient:
-          type: integer
+          type: string
         amount:
           type: string
     DishCategoryInput:
@@ -213,4 +213,4 @@ components:
         - category
       properties:
         category:
-          type: integer
+          type: string

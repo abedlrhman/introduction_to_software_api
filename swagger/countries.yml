@@ -42,7 +42,7 @@ paths:
           required: true
           description: ID of the country to update
           schema:
-            type: integer
+            type: string
       requestBody:
         content:
           application/json:
@@ -67,7 +67,7 @@ paths:
           required: true
           description: ID of the country to delete
           schema:
-            type: integer
+            type: string
       responses:
         '204':
           description: Country deleted successfully
@@ -80,7 +80,7 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
         name:
           type: string
     CountryInput: # Input schema for POST /countries
